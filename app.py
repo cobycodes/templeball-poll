@@ -67,75 +67,10 @@ def admin_page():
     # Convert that list into a single string with newlines
     available_string = "\n".join(available_lines)
 
-    # Return an HTML page with two textareas and copy buttons
-    # For brevity, we inline the HTML here. You could also use a template file.
-    return f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="UTF-8" />
-      <title>Admin - Templeball Poll</title>
-      <style>
-        body {{
-          font-family: sans-serif;
-          margin: 1em auto;
-          max-width: 600px;
-          background: #f9f9f9;
-          padding: 1em;
-        }}
-        h1 {{
-          text-align: center;
-          margin-bottom: 1em;
-        }}
-        .field-container {{
-          margin-bottom: 2em;
-        }}
-        textarea {{
-          width: 100%;
-          height: 4em;
-          margin-top: 0.5em;
-          font-family: monospace;
-        }}
-        button {{
-          margin-top: 0.5em;
-          padding: 0.5em 1em;
-          cursor: pointer;
-        }}
-      </style>
-    </head>
-    <body>
-      <h1>Admin Page</h1>
-
-      <div class="field-container">
-        <label for="pollDateField"><strong>Poll Date</strong></label>
-        <textarea id="pollDateField">{poll_date}</textarea>
-        <br />
-        <button onclick="copyToClipboard('pollDateField')">Copy Poll Date</button>
-      </div>
-
-      <div class="field-container">
-        <label for="availableField"><strong>List of Available People + inTime</strong></label>
-        <textarea id="availableField">{available_string}</textarea>
-        <br />
-        <button onclick="copyToClipboard('availableField')">Copy Available List</button>
-      </div>
-
-      <script>
-        function copyToClipboard(elementId) {{
-          const textarea = document.getElementById(elementId);
-          // Select the text
-          textarea.select();
-          textarea.setSelectionRange(0, 99999); // For mobile
-
-          // Execute the copy command
-          document.execCommand("copy");
-
-          alert("Copied to clipboard!");
-        }}
-      </script>
-    </body>
-    </html>
-    """
+    # render admin.html
+    return render_template("admin.html",
+                           poll_date=poll_date,
+                           available_string=available_string)
 
 if __name__ == '__main__':
     # Start the Flask dev server

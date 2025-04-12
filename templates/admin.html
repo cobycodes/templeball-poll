@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin - Templeball Poll</title>
+  <!-- Link to admin.css in your static folder -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+  <h1>Admin Page</h1>
+
+  <div class="field-container">
+    <label for="pollDateField"><strong>Poll Date</strong></label>
+    <textarea id="pollDateField">{{ poll_date }}</textarea>
+    <br />
+    <button onclick="copyToClipboard('pollDateField')">Copy Poll Date</button>
+  </div>
+
+  <div class="field-container">
+    <label for="availableField"><strong>List of Available People + inTime</strong></label>
+    <textarea id="availableField">{{ available_string }}</textarea>
+    <br />
+    <button onclick="copyToClipboard('availableField')">Copy Available List</button>
+  </div>
+
+  <script>
+    function copyToClipboard(elementId) {
+      const textarea = document.getElementById(elementId);
+      textarea.select();
+      textarea.setSelectionRange(0, 999999); // for mobile
+
+      document.execCommand("copy");
+      alert("Copied to clipboard!");
+    }
+  </script>
+</body>
+</html>
