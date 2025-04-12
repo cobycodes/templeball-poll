@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Admin - Templeball Poll</title>
-  <!-- Link to admin.css in your static folder -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Templeball - Admin</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-  <h1>Admin Page</h1>
-
-  <div class="field-container">
-    <label for="pollDateField"><strong>Poll Date</strong></label>
-    <textarea id="pollDateField">{{ poll_date }}</textarea>
-    <br />
-    <button onclick="copyToClipboard('pollDateField')">Copy Poll Date</button>
+  <div class="main-container">
+    <div class="main-nav">
+      <button onclick="location.href='/'">Vote</button>
+      <button class="active" onclick="lcation.href='/admin'">Admin</button>
+    </div>
+    <h1>Admin</h1>
+    <h2 id="poll-date"></h2>
+    <div class="field-container">
+      <label for="pollDateField"><strong>Poll Date</strong></label>
+      <textarea id="pollDateField" class="admin-textarea" readonly>{{ poll_date }}</textarea>
+      <br>
+      <button onclick="copyToClipboard('pollDateField')">Copy to clipboard</button>
+    </div>
+    <div class="field-container">
+      <label for="availableField"><strong>List of Available People + inTime</strong></label>
+      <textarea id="availableField" class="admin-textarea" readonly>{{ available_string }}</textarea>
+      <br>
+      <button onclick="copyToClipboard('availableField')">Copy to clipboard</button>
+    </div>
   </div>
-
-  <div class="field-container">
-    <label for="availableField"><strong>List of Available People + inTime</strong></label>
-    <textarea id="availableField">{{ available_string }}</textarea>
-    <br />
-    <button onclick="copyToClipboard('availableField')">Copy Available List</button>
-  </div>
-
   <script>
     function copyToClipboard(elementId) {
       const textarea = document.getElementById(elementId);
       textarea.select();
-      textarea.setSelectionRange(0, 999999); // for mobile
-
+      textarea.setSelectionRange(0, 999999); // For mobile devices
       document.execCommand("copy");
       alert("Copied to clipboard!");
     }

@@ -1,4 +1,4 @@
-/* Reset, base styles, tab styling, etc. */
+/* Reset base styles */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -32,13 +32,13 @@ h1 {
   color: #666;
 }
 
-/* Tab buttons */
-.tab-buttons {
+/* Main navigation at the top: Vote and Admin */
+.main-nav {
   display: flex;
   justify-content: center;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
 }
-.tab-buttons button {
+.main-nav button {
   background-color: #dc3545;
   color: #fff;
   border: none;
@@ -49,17 +49,38 @@ h1 {
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-.tab-buttons button:hover {
+.main-nav button:hover {
   background-color: #bb2d3b;
 }
-.tab-buttons button:focus {
-  outline: none;
-}
-.tab-buttons button.active {
+.main-nav button.active {
   background-color: #b02a37;
 }
 
-/* Tab content hidden except active */
+/* Sub-navigation for Vote page: Regulars and Extras */
+.sub-nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+.sub-nav button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.6em 1.2em;
+  margin: 0 0.3em;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.sub-nav button:hover {
+  background-color: #005fc7;
+}
+.sub-nav button.active {
+  background-color: #005fc7;
+}
+
+/* Tab content: used in the Vote page for Regulars/Extras sections */
 .tab-content {
   display: none;
 }
@@ -67,7 +88,7 @@ h1 {
   display: block;
 }
 
-/* Person rows */
+/* Person row styling in the Vote page */
 .person-row {
   display: flex;
   align-items: center;
@@ -85,7 +106,25 @@ h1 {
   font-size: 0.95em;
 }
 
-/* Responsive tweak for small screens */
+/* Field container styling for the Admin page */
+.field-container {
+  margin-bottom: 2em;
+}
+
+/* Styling for admin page text areas */
+.admin-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 8px;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+/* Responsive tweaks */
 @media (max-width: 480px) {
   .person-row {
     flex-direction: column;

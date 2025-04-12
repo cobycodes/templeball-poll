@@ -1,46 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Templeball Poll</title>
-  <!-- Use Flask's url_for('static', filename='...') to reference the CSS -->
+  <title>Templeball - Poll</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
   <div class="main-container">
-    <h1>Check Availability</h1>
-    <h3 id="poll-date"></h3>
-
-    <!-- Tab Buttons -->
-    <div class="tab-buttons">
+    <div class="main-nav">
+      <button id="vote-btn" class="active" onclick="location.href='/'">Vote</button>
+      <button id="admin-btn" class="active" onclick="location.href='/admin'">Admin</button>
+    </div>
+    <h1>Select Availability</h1>
+    <h2 id="poll-date"></h2>
+    <div class="sub-nav">
       <button id="regulars-tab-btn" class="active">Regulars</button>
       <button id="extras-tab-btn">Extras</button>
     </div>
-
-    <!-- Tab Content: Regulars -->
     <div id="regulars-container" class="tab-content active"></div>
-
-    <!-- Tab Content: Extras -->
     <div id="extras-container" class="tab-content"></div>
   </div>
-
   <script>
-    // 1) Fetch data => { pollDate, people }
     async function fetchData() {
       try {
-        const response = await fetch('/data');  // calls app.get('/data')
+        const response = await fetch('/data');
         const { pollDate, people } = await response.json();
-
         document.getElementById('poll-date').textContent = pollDate;
-
         const regulars = people.filter(p => p.label === 'regular');
         const extras   = people.filter(p => p.label === 'extra');
-
-        // Sort each group by name
+        // Sort alphabetically
         regulars.sort((a, b) => a.name.localeCompare(b.name));
         extras.sort((a, b) => a.name.localeCompare(b.name));
-
         renderPeople(regulars, 'regulars-container');
         renderPeople(extras, 'extras-container');
       } catch (err) {
@@ -51,14 +42,11 @@
     function renderPeople(personList, containerId) {
       const container = document.getElementById(containerId);
       container.innerHTML = '';
-
       personList.forEach(person => {
         const row = document.createElement('div');
         row.classList.add('person-row');
-
         const nameSpan = document.createElement('span');
         nameSpan.textContent = person.name + ': ';
-
         const select = document.createElement('select');
         const statuses = ['', 'available', 'not available', 'tentative'];
         statuses.forEach(status => {
@@ -70,12 +58,9 @@
           }
           select.appendChild(option);
         });
-
-        // Handle changes
         select.addEventListener('change', async e => {
           const newVal = e.target.value;
           try {
-            // PUT /people/<id>
             await fetch(`/people/${person.id}`, {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
@@ -86,7 +71,6 @@
             console.error('Error updating availability:', err);
           }
         });
-
         row.appendChild(nameSpan);
         row.appendChild(select);
         container.appendChild(row);
@@ -113,7 +97,6 @@
       regularsTab.classList.remove('active');
     });
 
-    // 2) Fetch data on page load
     fetchData();
   </script>
 </body>
