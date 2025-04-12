@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Templeball Poll</title>
+  <!-- Use Flask's url_for('static', filename='...') to reference the CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="main-container">
+    <h1>Check Availability</h1>
+    <h3 id="poll-date"></h3>
+
+    <!-- Tab Buttons -->
+    <div class="tab-buttons">
+      <button id="regulars-tab-btn" class="active">Regulars</button>
+      <button id="extras-tab-btn">Extras</button>
+    </div>
+
+    <!-- Tab Content: Regulars -->
+    <div id="regulars-container" class="tab-content active"></div>
+
+    <!-- Tab Content: Extras -->
+    <div id="extras-container" class="tab-content"></div>
+  </div>
+
+  <script>
+    // 1) Fetch data => { pollDate, people }
+    async function fetchData() {
+      try {
+        const response = await fetch('/data');  // calls app.get('/data')
+        const { pollDate, people } = await response.json();
+
+        document.getElementById('poll-date').textContent = pollDate;
+
+        const regulars = people.filter(p => p.label === 'regular');
+        const extras   = people.filter(p => p.label === 'extra');
+
+        // Sort each group by name
+        regulars.sort((a, b) => a.name.localeCompare(b.name));
+        extras.sort((a, b) => a.name.localeCompare(b.name));
+
+        renderPeople(regulars, 'regulars-container');
+        renderPeople(extras, 'extras-container');
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      }
+    }
+
+    function renderPeople(personList, containerId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+
+      personList.forEach(person => {
+        const row = document.createElement('div');
+        row.classList.add('person-row');
+
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = person.name + ': ';
+
+        const select = document.createElement('select');
+        const statuses = ['', 'available', 'not available', 'tentative'];
+        statuses.forEach(status => {
+          const option = document.createElement('option');
+          option.value = status;
+          option.textContent = status === '' ? '--- Select ---' : status;
+          if (status === person.availability) {
+            option.selected = true;
+          }
+          select.appendChild(option);
+        });
+
+        // Handle changes
+        select.addEventListener('change', async e => {
+          const newVal = e.target.value;
+          try {
+            // PUT /people/<id>
+            await fetch(`/people/${person.id}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ availability: newVal })
+            });
+            console.log(`Updated ${person.name} to ${newVal}`);
+          } catch (err) {
+            console.error('Error updating availability:', err);
+          }
+        });
+
+        row.appendChild(nameSpan);
+        row.appendChild(select);
+        container.appendChild(row);
+      });
+    }
+
+    // Tab switching logic
+    const regularsTabBtn = document.getElementById('regulars-tab-btn');
+    const extrasTabBtn   = document.getElementById('extras-tab-btn');
+    const regularsTab    = document.getElementById('regulars-container');
+    const extrasTab      = document.getElementById('extras-container');
+
+    regularsTabBtn.addEventListener('click', () => {
+      regularsTabBtn.classList.add('active');
+      extrasTabBtn.classList.remove('active');
+      regularsTab.classList.add('active');
+      extrasTab.classList.remove('active');
+    });
+
+    extrasTabBtn.addEventListener('click', () => {
+      extrasTabBtn.classList.add('active');
+      regularsTabBtn.classList.remove('active');
+      extrasTab.classList.add('active');
+      regularsTab.classList.remove('active');
+    });
+
+    // 2) Fetch data on page load
+    fetchData();
+  </script>
+</body>
+</html>
