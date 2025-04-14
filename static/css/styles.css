@@ -139,3 +139,25 @@ h1 {
     width: 100%;
   }
 }
+
+/* admin sections */
+.admin-section {
+  display: none;
+}
+.admin-section.active {
+  display: block;
+}
+
+/* semi-transparent background images */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/static/images/templeball.jpg') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2;
+  z-index: -1;
+}

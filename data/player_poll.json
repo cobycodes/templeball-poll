@@ -5,14 +5,14 @@
       "id": 1,
       "name": "Coby",
       "label": "regular",
-      "availability": "available",
+      "availability": "",
       "lastAvailable": "2025-04-12T10:18:30.452702"
     },
     {
       "id": 2,
       "name": "Nando",
       "label": "regular",
-      "availability": "available",
+      "availability": "",
       "lastAvailable": "2025-04-12T10:18:33.643888"
     },
     {
@@ -36,7 +36,7 @@
     {
       "id": 6,
       "name": "Tim",
-      "label": "regular",
+      "label": "extra",
       "availability": ""
     },
     {
@@ -49,8 +49,15 @@
       "id": 8,
       "name": "Todd",
       "label": "extra",
-      "availability": "available",
+      "availability": "",
       "lastAvailable": "2025-04-12T10:18:36.668458"
+    },
+    {
+      "id": 9,
+      "name": "Chung",
+      "label": "regular",
+      "availability": "",
+      "lastAvailable": ""
     }
   ]
 }

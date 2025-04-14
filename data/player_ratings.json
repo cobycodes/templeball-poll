@@ -1,0 +1,119 @@
+{
+    "title": "Player Ratings",
+    "people": [
+        {
+            "id": 1,
+            "firstName": "Eric",
+            "lastName": "Doan",
+            "height": "5'10",
+            "position": "Wing",
+            "playstyle": "Three-Level Scorer",
+            "playmaking": {
+                "ballHandling": 8,
+                "passVision": 6,
+                "passIQ": 6
+            },
+            "scoring": {
+                "layups": 8,
+                "midRange": 8,
+                "threePoint": 7,
+                "post": 4,
+                "shotCreating": 7,
+                "offConsistency": 7,
+                "shotIQ": 7
+            },
+            "rebounding": {
+                "oreb": 4,
+                "dreb": 5
+            },
+            "athleticism": {
+                "speed": 6,
+                "strength": 7,
+                "stamina": 7
+            },
+            "defense": {
+                "onBallDef": 6,
+                "offBallDef": 7,
+                "steal": 5,
+                "block": 3,
+                "defConsistency": 7
+            }
+        },
+        {
+            "id": 2,
+            "firstName": "Coby",
+            "lastName": "Godfrey",
+            "height": "6'0",
+            "position": "Wing",
+            "playstyle": "3PT Shooter & Hustle",
+            "playmaking": {
+                "ballHandling": 5,
+                "passVision": 6,
+                "passIQ": 7
+            },
+            "scoring": {
+                "layups": 7,
+                "midRange": 4,
+                "threePoint": 9,
+                "post": 3,
+                "shotCreating": 5,
+                "offConsistency": 8,
+                "shotIQ": 6
+            },
+            "rebounding": {
+                "oreb": 6,
+                "dreb": 7
+            },
+            "athleticism": {
+                "speed": 7,
+                "strength": 5,
+                "stamina": 9
+            },
+            "defense": {
+                "onBallDef": 7,
+                "offBallDef": 7,
+                "steal": 4,
+                "block": 4,
+                "defConsistency": 7
+            }
+        },
+        {
+            "id": 3,
+            "firstName": "Tommy",
+            "lastName": "Nguyen",
+            "height": "6'0",
+            "position": "Big",
+            "playstyle": "Post-scorer and Rebounder",
+            "playmaking": {
+                "ballHandling": 4,
+                "passVision": 4,
+                "passIQ": 6
+            },
+            "scoring": {
+                "layups": 8,
+                "midRange": 6,
+                "threePoint": 3,
+                "post": 8,
+                "shotCreating": 7,
+                "offConsistency": 8,
+                "shotIQ": 6
+            },
+            "rebounding": {
+                "oreb": 8,
+                "dreb": 9
+            },
+            "athleticism": {
+                "speed": 5,
+                "strength": 8,
+                "stamina": 7
+            },
+            "defense": {
+                "onBallDef": 7,
+                "offBallDef": 4,
+                "steal": 4,
+                "block": 7,
+                "defConsistency": 7
+            }
+        }
+    ]
+}

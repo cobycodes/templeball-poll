@@ -19,13 +19,21 @@ POLL_DATA_FILE = os.path.join(DATA_DIR, 'player_poll.json')
 RATINGS_DATA_FILE = os.path.join(DATA_DIR, 'player_ratings.json')
 
 # read and write to the poll data file
-def read_data():
+def read_poll_data():
     with open(POLL_DATA_FILE, 'r', encoding='utf-8') as f:
         return json.load(f)
-    
-def write_data(data):
+def write_poll_data(data):
     with open(POLL_DATA_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2)
+
+# read and write to the ratings data file
+def read_ratings_data():
+    with open(RATINGS_DATA_FILE, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+#def write_ratings_data():
+#    with open(RATINGS_DATA_FILE, 'w', encoding='utf-8') as f:
+#        json.dump(data, f, indent=2)
 
 @app.route('/')
 def home():
@@ -35,12 +43,12 @@ def home():
 @app.route('/data', methods=['GET'])
 def get_data():
     # Return { "pollDate": "...", "people": [...] }
-    data = read_data()
+    data = read_poll_data()
     return jsonify(data)
 
 @app.route('/people/<int:person_id>', methods=['PUT'])
 def update_availability(person_id):
-    data = read_data()  # { pollDate, people }
+    data = read_poll_data()  # { pollDate, people }
     people = data['people']
 
     # find the matching person
@@ -57,29 +65,32 @@ def update_availability(person_id):
         from datetime import datetime
         person['lastAvailable'] = datetime.now().isoformat()
 
-    write_data(data)
+    write_poll_data(data)
     return jsonify(person)
 
-@app.route("/admin")
+@app.route('/admin')
 def admin_page():
-    data = read_data()  # read_data() loads your data.json
+    data = read_poll_data()  # This loads your poll data (for poll results)
     poll_date = data.get("pollDate", "N/A")
-
-    # Build a list of "Name (lastAvailable: ...)" lines for users who are "available"
     available_lines = []
-    for person in data["people"]:
+    for person in data.get("people", []):
         if person.get("availability") == "available":
             name = person.get("name", "Unknown")
-            last_available = person.get("lastAvailable", "N/A") 
-            available_lines.append(f"{name} (Vote Time: {last_available})")
-
-    # Convert that list into a single string with newlines
+            in_time = person.get("inTime", "N/A")
+            available_lines.append(f"{name} (InTime: {in_time})")
     available_string = "\n".join(available_lines)
-
-    # render admin.html
-    return render_template("admin.html",
+    
+    # NEW: Read player ratings JSON file
+    player_ratings_data = read_ratings_data()
+    # Convert to a pretty JSON string for display
+    import json
+    player_ratings_string = json.dumps(player_ratings_data, indent=2)
+    
+    return render_template("admin.html", 
                            poll_date=poll_date,
-                           available_string=available_string)
+                           available_string=available_string,
+                           player_ratings=player_ratings_string)
+
 
 if __name__ == '__main__':
     # Start the Flask dev server
