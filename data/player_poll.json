@@ -1,0 +1,56 @@
+{
+  "pollDate": "March 17, 2025",
+  "people": [
+    {
+      "id": 1,
+      "name": "Coby",
+      "label": "regular",
+      "availability": "available",
+      "lastAvailable": "2025-04-12T10:18:30.452702"
+    },
+    {
+      "id": 2,
+      "name": "Nando",
+      "label": "regular",
+      "availability": "available",
+      "lastAvailable": "2025-04-12T10:18:33.643888"
+    },
+    {
+      "id": 3,
+      "name": "Eric",
+      "label": "regular",
+      "availability": ""
+    },
+    {
+      "id": 4,
+      "name": "Tommy",
+      "label": "regular",
+      "availability": ""
+    },
+    {
+      "id": 5,
+      "name": "Jeff",
+      "label": "extra",
+      "availability": ""
+    },
+    {
+      "id": 6,
+      "name": "Tim",
+      "label": "regular",
+      "availability": ""
+    },
+    {
+      "id": 7,
+      "name": "Christian",
+      "label": "extra",
+      "availability": ""
+    },
+    {
+      "id": 8,
+      "name": "Todd",
+      "label": "extra",
+      "availability": "available",
+      "lastAvailable": "2025-04-12T10:18:36.668458"
+    }
+  ]
+}

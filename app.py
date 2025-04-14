@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 from flask import Flask, request, jsonify, render_template
 import json
 import os
@@ -8,14 +9,22 @@ app = Flask(
     template_folder='templates'  # This points to myproject/templates/
 )
 
-DATA_FILE = os.path.join(os.path.dirname(__file__), 'data.json')
+# define the data directory relative to this file (root directory)
+# this will be moved to config
+DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
 
+# define the player_poll and player_ratings files
+# this will be moved to config
+POLL_DATA_FILE = os.path.join(DATA_DIR, 'player_poll.json')
+RATINGS_DATA_FILE = os.path.join(DATA_DIR, 'player_ratings.json')
+
+# read and write to the poll data file
 def read_data():
-    with open(DATA_FILE, 'r', encoding='utf-8') as f:
+    with open(POLL_DATA_FILE, 'r', encoding='utf-8') as f:
         return json.load(f)
-
+    
 def write_data(data):
-    with open(DATA_FILE, 'w', encoding='utf-8') as f:
+    with open(POLL_DATA_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2)
 
 @app.route('/')
