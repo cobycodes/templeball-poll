@@ -148,16 +148,20 @@ h1 {
   display: block;
 }
 
-/* semi-transparent background images */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('/static/images/templeball.jpg') no-repeat center center;
-  background-size: cover;
-  opacity: 0.2;
-  z-index: -1;
+.ratings-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+
+.ratings-table th,
+.ratings-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.ratings-table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
 }

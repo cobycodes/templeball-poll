@@ -82,14 +82,27 @@ def admin_page():
     
     # NEW: Read player ratings JSON file
     player_ratings_data = read_ratings_data()
-    # Convert to a pretty JSON string for display
-    import json
-    player_ratings_string = json.dumps(player_ratings_data, indent=2)
-    
     return render_template("admin.html", 
                            poll_date=poll_date,
                            available_string=available_string,
-                           player_ratings=player_ratings_string)
+                           player_ratings=player_ratings_data)
+
+@app.route('/admin/ratings')
+def admin_ratings_list():
+    # Read player ratings JSON (assumed to have a "people" key)
+    ratings_data = read_ratings_data()  
+    # Pass the entire ratings data (as a dict) to the new template.
+    return render_template("admin_ratings_list.html", ratings=ratings_data)
+
+@app.route('/admin/ratings/<int:player_id>')
+def admin_player(player_id):
+    ratings_data = read_ratings_data()
+    # Find the player matching player_id in the "people" array.
+    player = next((p for p in ratings_data.get("people", []) if p.get("id") == player_id), None)
+    if not player:
+        return "Player not found", 404
+    return render_template("admin_player.html", player=player)
+
 
 
 if __name__ == '__main__':
