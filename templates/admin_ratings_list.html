@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Player Ratings List</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin - Player Ratings List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
   <div class="main-container">
-    <!-- Main navigation (reuse your main-nav from other templates) -->
+    <!-- Main navigation -->
     <div class="main-nav">
       <button onclick="location.href='/'">Vote</button>
       <button onclick="location.href='/admin'">Admin</button>
     </div>
+    <!-- Admin sub-navigation -->
     <div class="sub-nav">
-        <!-- Poll Results is the current section -->
-        <button id="poll-results-btn" class="active" onclick="location.href='/admin'">Poll Results</button>
-        <!-- Player Ratings button now navigates to a separate page -->
-        <button id="players-btn" onclick="location.href='/admin/ratings'">Players</button>
-      </div>
-    <h1>Player Ratings - List</h1>
+      <button id="poll-results-btn" onclick="location.href='/admin'">Poll Results</button>
+      <button id="players-btn" class="active" onclick="location.href='/admin/ratings'">Players</button>
+    </div>
+    <h1>Player Ratings – List</h1>
+    <!-- Add Player button -->
+    <div style="text-align:right; margin-bottom:1em;">
+      <button onclick="location.href='/admin/ratings/add'">+ Add Player</button>
+    </div>
     <table class="ratings-table">
       <thead>
         <tr>

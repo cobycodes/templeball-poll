@@ -1,10 +1,11 @@
+{% import "_player_tables.html" as tables %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Player Ratings Details</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin – Edit Player Ratings</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
 </head>
 <body>
   <div class="main-container">
@@ -12,206 +13,49 @@
       <button onclick="location.href='/'">Vote</button>
       <button onclick="location.href='/admin'">Admin</button>
     </div>
-    <h1>{{ player.playerInfo.firstName }} {{ player.playerInfo.lastName }}</h1>
-    
-    <!-- Player Info table -->
-    <h3>Player Info</h3>
-    <table class="ratings-table">
-        <thead>
-            <tr>
-                <th>Stat</th>
-                <th>Rating</th>
+    <h1>Edit Player: {{ player.playerInfo.firstName }} {{ player.playerInfo.lastName }}</h1>
+    <button id="edit-btn" type="button" onclick="toggleEdit()">Edit</button>
+    <button id="save-btn" type="button" style="display:none;" onclick="saveEdits({{ player.id }})">Save</button>
 
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Name</td>
-                <td>{{ player.playerInfo.firstName }} {{ player.playerInfo.lastName }}</td>
-            </tr>
-            <tr>
-                <td>Height</td>
-                <td>{{ player.playerInfo.height }}</td>
-            </tr>
-            <tr>
-                <td>Position</td>
-                <td>{{ player.playerInfo.position }}</td>
-            </tr>
-            <tr>
-                <td>Playstyle</td>
-                <td>{{ player.playerInfo.playstyle }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <!-- Playmaking table -->
-    <h3>Playmaking</h3>
-    <table class="ratings-table">
-      <thead>
-        <tr>
-          <th>Stat</th>
-          <th>Rating</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Ball Handling</td>
-          <td>{{ player.playmaking.ballHandling }}</td>
-        </tr>
-        <tr>
-          <td>Pass Vision</td>
-          <td>{{ player.playmaking.passVision }}</td>
-        </tr>
-        <tr>
-          <td>Pass IQ</td>
-          <td>{{ player.playmaking.passIQ }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <br>
-    <!-- Scoring table -->
-    <h3>Scoring</h3>
-    <table class="ratings-table">
-      <thead>
-        <tr>
-          <th>Stat</th>
-          <th>Rating</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Layups</td>
-          <td>{{ player.scoring.layups }}</td>
-        </tr>
-        <tr>
-          <td>Mid Range</td>
-          <td>{{ player.scoring.midRange }}</td>
-        </tr>
-        <tr>
-          <td>3 Point</td>
-          <td>{{ player.scoring.threePoint }}</td>
-        </tr>
-        <tr>
-            <td>Post</td>
-            <td>{{ player.scoring.post }}</td>
-        </tr>
-        <tr>
-            <td>Shot Creation</td>
-            <td>{{ player.scoring.shotCreating }}</td>
-        </tr>
-        <tr>
-            <td>Shot IQ</td>
-            <td>{{ player.scoring.shotIQ }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <br>
-    <!-- Rebounding tabl -->
-    <h3>Rebounding</h3>
-    <table class="ratings-table">
-      <thead>
-        <tr>
-          <th>Stat</th>
-          <th>Rating</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Offensive Rebounding</td>
-          <td>{{ player.rebounding.oreb }}</td>
-        </tr>
-        <tr>
-          <td>Defensive Rebounding</td>
-          <td>{{ player.rebounding.dreb }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <br>
-    <!-- Athleticism table -->
-    <h3>Athleticism</h3>
-    <table class="ratings-table">
-      <thead>
-        <tr>
-          <th>Stat</th>
-          <th>Rating</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Speed</td>
-          <td>{{ player.athleticism.speed }}</td>
-        </tr>
-        <tr>
-          <td>Strength</td>
-          <td>{{ player.athleticism.strength }}</td>
-        </tr>
-        <tr>
-            <td>Stamina</td>
-            <td>{{ player.athleticism.stamina }}</td>
-          </tr>
-          <tr>
-            <td>Vertical</td>
-            <td>{{ player.athleticism.vertical }}</td>
-          </tr>
-      </tbody>
-    </table>
-    <br>
-    <!-- Defense table -->
-    <h3>Defense</h3>
-    <table class="ratings-table">
-      <thead>
-        <tr>
-          <th>Stat</th>
-          <th>Rating</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Perimeter Defense</td>
-          <td>{{ player.defense.perimeterDef }}</td>
-        </tr>
-        <tr>
-          <td>Post Defense</td>
-          <td>{{ player.defense.postDef }}</td>
-        </tr>
-        <tr>
-            <td>Help Defense</td>
-            <td>{{ player.defense.helpDef }}</td>
-          </tr>
-          <tr>
-            <td>Steal</td>
-            <td>{{ player.defense.steal }}</td>
-          </tr>
-          <tr>
-            <td>Block</td>
-            <td>{{ player.defense.block }}</td>
-          </tr>
-      </tbody>
-    </table>
-    <br>
-    <!-- Intangibles table -->
-    <h3>Intangibles</h3>
-    <table class="ratings-table">
-      <thead>
-        <tr>
-          <th>Stat</th>
-          <th>Rating</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Consistency</td>
-          <td>{{ player.intangibles.consistency }}</td>
-        </tr>
-        <tr>
-          <td>Communication</td>
-          <td>{{ player.intangibles.communication }}</td>
-        </tr>
-      </tbody>
-    </table>
+    {{ tables.render_player_tables(player, readonly=true) }}
 
-    <br>
-    <button onclick="location.href='/admin/ratings'">Back to List</button>
+    <button type="button" onclick="location.href='/admin/ratings'">Back to List</button>
   </div>
+
+  <script>
+    let isEditing = false;
+    function toggleEdit() {
+      if (!isEditing) {
+        document.querySelectorAll('.editable-field').forEach(el => el.removeAttribute('readonly'));
+        document.getElementById('edit-btn').style.display = 'none';
+        document.getElementById('save-btn').style.display = 'inline-block';
+        isEditing = true;
+      }
+    }
+
+    async function saveEdits(playerId) {
+      const form = document.getElementById('player-edit-form');
+      const formData = new FormData(form);
+      const updateData = {};
+      formData.forEach((value, key) => {
+        const [cat, fld] = key.split('.', 2);
+        updateData[cat] = updateData[cat] || {};
+        updateData[cat][fld] = isNaN(value) ? value : Number(value);
+      });
+      try {
+        const res = await fetch(`/admin/ratings/${playerId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updateData)
+        });
+        if (!res.ok) throw new Error('Save failed');
+        alert('Saved successfully');
+        location.reload();
+      } catch (e) {
+        console.error(e);
+        alert('Error saving changes');
+      }
+    }
+  </script>
 </body>
 </html>

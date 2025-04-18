@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 import json
 import os
 
@@ -103,7 +103,65 @@ def admin_player(player_id):
         return "Player not found", 404
     return render_template("admin_player.html", player=player)
 
+@app.route('/admin/ratings/<int:player_id>', methods=['PUT'])
+def update_player_ratings(player_id):
+    ratings_data = read_ratings_data()  # load ratings from RATINGS_DATA_FILE
+    players = ratings_data.get("people", [])
+    player = next((p for p in players if p.get("id") == player_id), None)
+    if not player:
+        return jsonify({"error": "Player not found"}), 404
+    
+    update_data = request.json  # this is the dictionary sent from our form
+    
+    # For each key in the update data, update the player's record.
+    # Here we assume a shallow merge for top-level keys and one level of nesting.
+    for key, value in update_data.items():
+        if isinstance(value, dict):
+            if key not in player:
+                player[key] = {}
+            for sub_key, sub_value in value.items():
+                player[key][sub_key] = sub_value
+        else:
+            player[key] = value
+    
+    # Write back the updated ratings file.
+    with open(RATINGS_DATA_FILE, 'w', encoding='utf-8') as f:
+        json.dump(ratings_data, f, indent=2)
+    
+    return jsonify(player)
 
+@app.route('/admin/ratings/add', methods=['GET'])
+def admin_add_player_form():
+    # Render the form template we just created
+    return render_template('admin_add_player.html')
+
+@app.route('/admin/ratings', methods=['POST'])
+def admin_add_player():
+    # Read existing ratings
+    data = read_ratings_data()
+    players = data.setdefault('people', [])
+    
+    # Determine new ID
+    max_id = max((p.get('id', 0) for p in players), default=0)
+    new_id = max_id + 1
+
+    # Build the new player dict from form data
+    form = request.form.to_dict(flat=True)
+    new_player = {'id': new_id}
+
+    # Helper to nest keys on dots
+    for full_key, value in form.items():
+        category, field = full_key.split('.', 1)
+        new_player.setdefault(category, {})[field] = (int(value) 
+            if value.isdigit() else value)
+
+    # Append and save
+    players.append(new_player)
+    with open(RATINGS_DATA_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2)
+
+    # Redirect back to the list
+    return redirect(url_for('admin_ratings_list'))
 
 if __name__ == '__main__':
     # Start the Flask dev server

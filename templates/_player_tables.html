@@ -1,0 +1,185 @@
+{% macro render_player_tables(player, readonly=true) %}
+  <form id="player-edit-form" {% if player.id is defined %}data-player-id="{{ player.id }}"{% endif %}>
+    {# Player Info #}
+    <h3>Player Info</h3>
+    <table class="ratings-table">
+      <thead><tr><th>Field</th><th>Value</th></tr></thead>
+      <tbody>
+        {% for field,label in {
+          'firstName':'First Name',
+          'lastName':'Last Name',
+          'height':'Height',
+          'position':'Position',
+          'playstyle':'Playstyle'
+        }.items() %}
+        <tr>
+          <td>{{ label }}</td>
+          <td>
+            <input
+              class="editable-field"
+              name="playerInfo.{{ field }}"
+              value="{{ player.playerInfo[field] if player.playerInfo[field] is defined else '' }}"
+              {% if readonly %}readonly{% endif %}
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {# Playmaking #}
+    <h3>Playmaking</h3>
+    <table class="ratings-table">
+      <thead><tr><th>Metric</th><th>Rating</th></tr></thead>
+      <tbody>
+        {% for field,label in {
+          'dribblePen':'Dribble Penetration',
+          'ballHandling':'Ball Handling',
+          'passVision':'Pass Vision',
+          'passIQ':'Pass IQ'
+        }.items() %}
+        <tr>
+          <td>{{ label }}</td>
+          <td>
+            <input
+              class="editable-field"
+              name="playmaking.{{ field }}"
+              value="{{ player.playmaking[field] if player.playmaking[field] is defined else '' }}"
+              {% if readonly %}readonly{% endif %}
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {# Scoring #}
+    <h3>Scoring</h3>
+    <table class="ratings-table">
+      <thead><tr><th>Metric</th><th>Rating</th></tr></thead>
+      <tbody>
+        {% for field,label in {
+          'layups':'Layups',
+          'midRange':'Mid Range',
+          'threePoint':'3 Point',
+          'post':'Post',
+          'shotCreating':'Shot Creating',
+          'shotIQ':'Shot IQ'
+        }.items() %}
+        <tr>
+          <td>{{ label }}</td>
+          <td>
+            <input
+              class="editable-field"
+              name="scoring.{{ field }}"
+              value="{{ player.scoring[field] if player.scoring[field] is defined else '' }}"
+              {% if readonly %}readonly{% endif %}
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {# Rebounding #}
+    <h3>Rebounding</h3>
+    <table class="ratings-table">
+      <thead><tr><th>Metric</th><th>Rating</th></tr></thead>
+      <tbody>
+        {% for field,label in {
+          'oreb':'Offensive Rebounding',
+          'dreb':'Defensive Rebounding'
+        }.items() %}
+        <tr>
+          <td>{{ label }}</td>
+          <td>
+            <input
+              class="editable-field"
+              name="rebounding.{{ field }}"
+              value="{{ player.rebounding[field] if player.rebounding[field] is defined else '' }}"
+              {% if readonly %}readonly{% endif %}
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {# Athleticism #}
+    <h3>Accleticism</h3>
+    <table class="ratings-table">
+      <thead><tr><th>Metric</th><th>Rating</th></tr></thead>
+      <tbody>
+        {% for field,label in {
+          'speed':'Speed',
+          'strength':'Strength',
+          'stamina':'Stamina',
+          'vertical':'Vertical'
+        }.items() %}
+        <tr>
+          <td>{{ label }}</td>
+          <td>
+            <input
+              class="editable-field"
+              name="athleticism.{{ field }}"
+              value="{{ player.athleticism[field] if player.athleticism[field] is defined else '' }}"
+              {% if readonly %}readonly{% endif %}
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {# Defense #}
+    <h3>Defense</h3>
+    <table class="ratings-table">
+      <thead><tr><th>Metric</th><th>Rating</th></tr></thead>
+      <tbody>
+        {% for field,label in {
+          'perimeterDef':'Perimeter Defense',
+          'postDef':'Post Defense',
+          'helpDef':'Help Defense',
+          'steal':'Steal',
+          'block':'Block'
+        }.items() %}
+        <tr>
+          <td>{{ label }}</td>
+          <td>
+            <input
+              class="editable-field"
+              name="defense.{{ field }}"
+              value="{{ player.defense[field] if player.defense[field] is defined else '' }}"
+              {% if readonly %}readonly{% endif %}
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {# Intangibles #}
+    <h3>Intangibles</h3>
+    <table class="ratings-table">
+      <thead><tr><th>Metric</th><th>Rating</th></tr></thead>
+      <tbody>
+        {% for field,label in {
+          'consistency':'Consistency',
+          'communication':'Communication'
+        }.items() %}
+        <tr>
+          <td>{{ label }}</td>
+          <td>
+            <input
+              class="editable-field"
+              name="intangibles.{{ field }}"
+              value="{{ player.intangibles[field] if player.intangibles[field] is defined else '' }}"
+              {% if readonly %}readonly{% endif %}
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </form>
+{% endmacro %}

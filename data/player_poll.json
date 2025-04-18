@@ -19,13 +19,15 @@
       "id": 3,
       "name": "Eric",
       "label": "regular",
-      "availability": ""
+      "availability": "available",
+      "lastAvailable": "2025-04-16T10:13:21.545445"
     },
     {
       "id": 4,
       "name": "Tommy",
       "label": "regular",
-      "availability": ""
+      "availability": "available",
+      "lastAvailable": "2025-04-16T10:13:22.408583"
     },
     {
       "id": 5,
@@ -56,8 +58,8 @@
       "id": 9,
       "name": "Chung",
       "label": "regular",
-      "availability": "",
-      "lastAvailable": ""
+      "availability": "available",
+      "lastAvailable": "2025-04-16T10:13:20.461807"
     }
   ]
 }

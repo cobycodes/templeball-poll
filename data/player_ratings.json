@@ -1,50 +1,185 @@
 {
-    "title": "Player Ratings",
-    "people": [
-        {
-            "id": 1,
-            "playerInfo": {
-                "firstName": "Eric",
-                "lastName": "Doan",
-                "height": "5'10",
-                "position": "Wing",
-                "playstyle": "Three-Level Scorer"
-            },
-            "playmaking": {
-                "dribblePen": 8,
-                "ballHandling": 8,
-                "passVision": 6,
-                "passIQ": 6
-            },
-            "scoring": {
-                "layups": 8,
-                "midRange": 8,
-                "threePoint": 7,
-                "post": 4,
-                "shotCreating": 7,
-                "shotIQ": 7
-            },
-            "rebounding": {
-                "oreb": 4,
-                "dreb": 5
-            },
-            "athleticism": {
-                "speed": 6,
-                "strength": 7,
-                "stamina": 7,
-                "vertical": 5
-            },
-            "defense": {
-                "perimeterDef": 7,
-                "postDef": 5,
-                "helpDef": 5,
-                "steal": 5,
-                "block": 3
-            },
-            "intangibles": {
-                "consistency": 7,
-                "communication": 7
-            }
-        }
-    ]
+  "title": "Player Ratings",
+  "people": [
+    {
+      "id": 1,
+      "playerInfo": {
+        "firstName": "Louie",
+        "lastName": "Mangilit",
+        "height": "3'2",
+        "position": "Guard",
+        "playstyle": "Pass-first Floor General"
+      },
+      "playmaking": {
+        "dribblePen": 3,
+        "ballHandling": "9",
+        "passVision": "7",
+        "passIQ": "9"
+      },
+      "scoring": {
+        "layups": 6,
+        "midRange": 3,
+        "threePoint": 6,
+        "post": 3,
+        "shotCreating": 4,
+        "shotIQ": 8
+      },
+      "rebounding": {
+        "oreb": 3,
+        "dreb": 7
+      },
+      "athleticism": {
+        "speed": 6,
+        "strength": 7,
+        "stamina": 7,
+        "vertical": 5
+      },
+      "defense": {
+        "perimeterDef": 7,
+        "postDef": 5,
+        "helpDef": 5,
+        "steal": 5,
+        "block": 3
+      },
+      "intangibles": {
+        "consistency": 7,
+        "communication": 7
+      }
+    },
+    {
+      "id": 2,
+      "playerInfo": {
+        "firstName": "Coby",
+        "lastName": "Godfrey",
+        "height": "6'0",
+        "position": "Wing",
+        "playstyle": "3PT & Fast-Break Scorer"
+      },
+      "playmaking": {
+        "dribblePen": 4,
+        "ballHandling": 6,
+        "passVision": 5,
+        "passIQ": 7
+      },
+      "scoring": {
+        "layups": 7,
+        "midRange": 4,
+        "threePoint": 9,
+        "post": 2,
+        "shotCreating": 5,
+        "shotIQ": 8
+      },
+      "rebounding": {
+        "oreb": 5,
+        "dreb": 7
+      },
+      "athleticism": {
+        "speed": 8,
+        "strength": 4,
+        "stamina": 9,
+        "vertical": 5
+      },
+      "defense": {
+        "perimeterDef": 6,
+        "postDef": 4,
+        "helpDef": 6,
+        "steal": 5,
+        "block": 4
+      },
+      "intangibles": {
+        "consistency": 7,
+        "communication": 7
+      }
+    },
+    {
+      "id": 3,
+      "playerInfo": {
+        "firstName": "Eric",
+        "lastName": "Doan",
+        "height": "5'10",
+        "position": "Wing",
+        "playstyle": "Three Level Scorer"
+      },
+      "playmaking": {
+        "dribblePen": 8,
+        "ballHandling": 8,
+        "passVision": 5,
+        "passIQ": 5
+      },
+      "scoring": {
+        "layups": 8,
+        "midRange": 8,
+        "threePoint": 8,
+        "post": 5,
+        "shotCreating": 7,
+        "shotIQ": 6
+      },
+      "rebounding": {
+        "oreb": 4,
+        "dreb": 6
+      },
+      "athleticism": {
+        "speed": 6,
+        "strength": 7,
+        "stamina": 7,
+        "vertical": 5
+      },
+      "defense": {
+        "perimeterDef": 7,
+        "postDef": 5,
+        "helpDef": 4,
+        "steal": 5,
+        "block": 4
+      },
+      "intangibles": {
+        "consistency": 7,
+        "communication": 7
+      }
+    },
+    {
+      "id": 4,
+      "playerInfo": {
+        "firstName": "Fernando",
+        "lastName": "Rodriguez",
+        "height": "5'8\"",
+        "position": "Guard",
+        "playstyle": "Pass-first 3pt Shooter"
+      },
+      "playmaking": {
+        "dribblePen": 4,
+        "ballHandling": 7,
+        "passVision": 6,
+        "passIQ": 8
+      },
+      "scoring": {
+        "layups": 5,
+        "midRange": 6,
+        "threePoint": 6,
+        "post": 3,
+        "shotCreating": 4,
+        "shotIQ": 7
+      },
+      "rebounding": {
+        "oreb": 3,
+        "dreb": 5
+      },
+      "athleticism": {
+        "speed": 5,
+        "strength": 5,
+        "stamina": 5,
+        "vertical": 5
+      },
+      "defense": {
+        "perimeterDef": 4,
+        "postDef": 4,
+        "helpDef": 4,
+        "steal": 4,
+        "block": 4
+      },
+      "intangibles": {
+        "consistency": 4,
+        "communication": 4
+      }
+    }
+  ]
 }
