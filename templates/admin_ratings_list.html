@@ -9,10 +9,7 @@
 <body>
   <div class="main-container">
     <!-- Main navigation -->
-    <div class="main-nav">
-      <button onclick="location.href='/'">Vote</button>
-      <button onclick="location.href='/admin'">Admin</button>
-    </div>
+    {% include '_main_nav.html' %}
     <!-- Admin sub-navigation -->
     <div class="sub-nav">
       <button id="poll-results-btn" onclick="location.href='/admin'">Poll Results</button>

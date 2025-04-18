@@ -9,10 +9,7 @@
 </head>
 <body>
   <div class="main-container">
-    <div class="main-nav">
-      <button onclick="location.href='/'">Vote</button>
-      <button onclick="location.href='/admin'">Admin</button>
-    </div>
+    {% include '_main_nav.html' %}
     <h1>Edit Player: {{ player.playerInfo.firstName }} {{ player.playerInfo.lastName }}</h1>
     <button id="edit-btn" type="button" onclick="toggleEdit()">Edit</button>
     <button id="save-btn" type="button" style="display:none;" onclick="saveEdits({{ player.id }})">Save</button>

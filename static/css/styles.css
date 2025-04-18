@@ -173,3 +173,38 @@ input.editable-field:focus {
   outline: 1px solid #ccc;
   background: #fff;
 }
+
+.main-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-nav .nav-separator {
+  display: inline-block;
+  width: 1px;
+  height: 1.6em;
+  background-color: #ccc;
+  margin: 0 0.6em;
+}
+
+.poll-container,
+.profile-container {
+  background-color: #f9fafb;
+  padding: 1.5em;
+  margin-bottom: 1.5em;
+  border-radius: 8px;
+}
+
+/* Bigger select and saved message */
+.availability-select {
+  font-size: 1.2em;
+  padding: 0.5em;
+}
+.save-msg {
+  visibility: hidden;
+  margin-left: 1em;
+  color: #28a745;
+  font-weight: 600;
+  font-size: 1.1em;
+}

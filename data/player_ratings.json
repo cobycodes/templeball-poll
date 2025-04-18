@@ -3,6 +3,9 @@
   "people": [
     {
       "id": 1,
+      "password": "abc123",
+      "userType": "user",
+      "membership": "regular",
       "playerInfo": {
         "firstName": "Louie",
         "lastName": "Mangilit",
@@ -48,6 +51,9 @@
     },
     {
       "id": 2,
+      "password": "abc123",
+      "userType": "admin",
+      "membership": "regular",
       "playerInfo": {
         "firstName": "Coby",
         "lastName": "Godfrey",
@@ -93,6 +99,9 @@
     },
     {
       "id": 3,
+      "password": "abc123",
+      "userType": "user",
+      "membership": "regular",
       "playerInfo": {
         "firstName": "Eric",
         "lastName": "Doan",
@@ -138,6 +147,9 @@
     },
     {
       "id": 4,
+      "password": "abc123",
+      "userType": "user",
+      "membership": "regular",
       "playerInfo": {
         "firstName": "Fernando",
         "lastName": "Rodriguez",
@@ -180,6 +192,54 @@
         "consistency": 4,
         "communication": 4
       }
-    }
+    },
+    {
+        "id": 5,
+        "password": "abc123",
+        "userType": "user",
+        "membership": "extra",
+        "playerInfo": {
+          "firstName": "Christian",
+          "lastName": "Ramos",
+          "height": "5'8\"",
+          "position": "Guard",
+          "playstyle": "Pass-first 3pt Shooter"
+        },
+        "playmaking": {
+          "dribblePen": 4,
+          "ballHandling": 7,
+          "passVision": 6,
+          "passIQ": 8
+        },
+        "scoring": {
+          "layups": 5,
+          "midRange": 6,
+          "threePoint": 6,
+          "post": 3,
+          "shotCreating": 4,
+          "shotIQ": 7
+        },
+        "rebounding": {
+          "oreb": 3,
+          "dreb": 5
+        },
+        "athleticism": {
+          "speed": 5,
+          "strength": 5,
+          "stamina": 5,
+          "vertical": 5
+        },
+        "defense": {
+          "perimeterDef": 4,
+          "postDef": 4,
+          "helpDef": 4,
+          "steal": 4,
+          "block": 4
+        },
+        "intangibles": {
+          "consistency": 4,
+          "communication": 4
+        }
+      }
   ]
 }

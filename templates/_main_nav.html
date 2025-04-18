@@ -1,0 +1,8 @@
+<div class="main-nav">
+    <button onclick="location.href='/'">Vote</button>
+    {% if session.get('user_type') == 'admin' %}
+      <button onclick="location.href='/admin'">Admin</button>
+    {% endif %}
+    <span class="nav-separator"></span>
+    <button onclick="location.href='/logout'">Logout</button>
+  </div>

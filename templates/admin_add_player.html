@@ -8,10 +8,7 @@
 </head>
 <body>
   <div class="main-container">
-    <div class="main-nav">
-      <button onclick="location.href='/'">Vote</button>
-      <button onclick="location.href='/admin'">Admin</button>
-    </div>
+    {% include '_main_nav.html' %}
     <h1>Add New Player</h1>
 
     {{ tables.render_player_tables({'playerInfo':{},'playmaking':{},'scoring':{},'rebounding':{},'athleticism':{},'defense':{},'intangibles':{}}, readonly=false) }}

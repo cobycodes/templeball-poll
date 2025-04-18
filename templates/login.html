@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login – Templeball Admin</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+  <div class="main-container">
+    <h1>Login</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, msg in messages %}
+            <li class="{{ category }}">{{ msg }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST"
+          action="{{ url_for('login') }}{% if request.args.next %}?next={{ request.args.next|urlencode }}{% endif %}">
+      <label for="username">Username<br>
+        <input id="username"
+               name="username"
+               type="text"
+               placeholder="e.g. edoan for Eric Doan"
+               required />
+      </label>
+      <br><br>
+      <label for="password">Password<br>
+        <input id="password"
+               name="password"
+               type="password"
+               placeholder="plain-text password (testing only)"
+               required />
+      </label>
+      <br><br>
+      <button type="submit">Log In</button>
+    </form>
+  </div>
+</body>
+</html>

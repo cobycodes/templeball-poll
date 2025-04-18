@@ -3,61 +3,41 @@
   "people": [
     {
       "id": 1,
-      "name": "Coby",
+      "firstName": "Louie",
+      "lastName": "Mangilit",
       "label": "regular",
-      "availability": "",
-      "lastAvailable": "2025-04-12T10:18:30.452702"
+      "availability": "available",
+      "lastAvailable": "2025-04-16T10:13:20.461807"
     },
     {
       "id": 2,
-      "name": "Nando",
+      "firstName": "Coby",
+      "lastName": "Godfrey",
       "label": "regular",
-      "availability": "",
-      "lastAvailable": "2025-04-12T10:18:33.643888"
+      "availability": "available",
+      "lastAvailable": "2025-04-16T10:13:20.461807"
     },
     {
       "id": 3,
-      "name": "Eric",
+      "firstName": "Eric",
+      "lastName": "Doan",
       "label": "regular",
       "availability": "available",
-      "lastAvailable": "2025-04-16T10:13:21.545445"
+      "lastAvailable": "2025-04-16T10:13:20.461807"
     },
     {
       "id": 4,
-      "name": "Tommy",
+      "firstName": "Fernando",
+      "lastName": "Rodriguez",
       "label": "regular",
       "availability": "available",
-      "lastAvailable": "2025-04-16T10:13:22.408583"
+      "lastAvailable": "2025-04-16T10:13:20.461807"
     },
     {
       "id": 5,
-      "name": "Jeff",
+      "firstName": "Christian",
+      "lastName": "Ramos",
       "label": "extra",
-      "availability": ""
-    },
-    {
-      "id": 6,
-      "name": "Tim",
-      "label": "extra",
-      "availability": ""
-    },
-    {
-      "id": 7,
-      "name": "Christian",
-      "label": "extra",
-      "availability": ""
-    },
-    {
-      "id": 8,
-      "name": "Todd",
-      "label": "extra",
-      "availability": "",
-      "lastAvailable": "2025-04-12T10:18:36.668458"
-    },
-    {
-      "id": 9,
-      "name": "Chung",
-      "label": "regular",
       "availability": "available",
       "lastAvailable": "2025-04-16T10:13:20.461807"
     }

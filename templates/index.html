@@ -1,103 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Templeball - Poll</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Templeball – Poll</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
 </head>
 <body>
   <div class="main-container">
-    <div class="main-nav">
-      <button id="vote-btn" class="active" onclick="location.href='/'">Vote</button>
-      <button id="admin-btn" class="active" onclick="location.href='/admin'">Admin</button>
-    </div>
-    <h1>Select Availability</h1>
-    <h2 id="poll-date"></h2>
-    <div class="sub-nav">
-      <button id="regulars-tab-btn" class="active">Regulars</button>
-      <button id="extras-tab-btn">Extras</button>
-    </div>
-    <div id="regulars-container" class="tab-content active"></div>
-    <div id="extras-container" class="tab-content"></div>
+    {% include '_main_nav.html' %}
+
+    <h1 id="poll-heading">Poll for {{ poll_date }}</h1>
+
+    {% if current_player %}
+      <div class="poll-container">
+        <h2>Your Availability</h2>
+        <select id="availability-select" class="availability-select">
+          <option value="">--- Select ---</option>
+          <option value="available">available</option>
+          <option value="not available">not available</option>
+          <option value="tentative">tentative</option>
+        </select>
+        <span id="save-msg" class="save-msg">Saved!</span>
+      </div>
+
+      <div class="profile-container">
+        <h2>Your Profile</h2>
+        <table class="ratings-table">
+          <tr><th>First Name</th><td>{{ current_player.playerInfo.firstName }}</td></tr>
+          <tr><th>Last Name</th><td>{{ current_player.playerInfo.lastName }}</td></tr>
+          <tr><th>Height</th><td>{{ current_player.playerInfo.height }}</td></tr>
+          <tr><th>Position</th><td>{{ current_player.playerInfo.position }}</td></tr>
+          <tr><th>Playstyle</th><td>{{ current_player.playerInfo.playstyle }}</td></tr>
+        </table>
+      </div>
+    {% else %}
+      <p>Error: your user record wasn’t found.</p>
+    {% endif %}
   </div>
+
   <script>
-    async function fetchData() {
+  (async function(){
+    const resp = await fetch('/data');
+    const { pollDate, people } = await resp.json();
+    document.getElementById('poll-heading').textContent = `Poll for ${pollDate}`;
+
+    const me = people.find(p => p.id === {{ current_user_id }});
+    if (!me) return;
+
+    const sel = document.getElementById('availability-select');
+    sel.value = me.availability || '';
+
+    sel.addEventListener('change', async () => {
       try {
-        const response = await fetch('/data');
-        const { pollDate, people } = await response.json();
-        document.getElementById('poll-date').textContent = pollDate;
-        const regulars = people.filter(p => p.label === 'regular');
-        const extras   = people.filter(p => p.label === 'extra');
-        // Sort alphabetically
-        regulars.sort((a, b) => a.name.localeCompare(b.name));
-        extras.sort((a, b) => a.name.localeCompare(b.name));
-        renderPeople(regulars, 'regulars-container');
-        renderPeople(extras, 'extras-container');
-      } catch (err) {
-        console.error('Error fetching data:', err);
+        await fetch(`/people/${me.id}`, {
+          method: 'PUT',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ availability: sel.value })
+        });
+        const msg = document.getElementById('save-msg');
+        msg.style.visibility = 'visible';
+        setTimeout(() => { msg.style.visibility = 'hidden'; }, 2000);
+      } catch (e) {
+        console.error('Error saving availability:', e);
       }
-    }
-
-    function renderPeople(personList, containerId) {
-      const container = document.getElementById(containerId);
-      container.innerHTML = '';
-      personList.forEach(person => {
-        const row = document.createElement('div');
-        row.classList.add('person-row');
-        const nameSpan = document.createElement('span');
-        nameSpan.textContent = person.name + ': ';
-        const select = document.createElement('select');
-        const statuses = ['', 'available', 'not available', 'tentative'];
-        statuses.forEach(status => {
-          const option = document.createElement('option');
-          option.value = status;
-          option.textContent = status === '' ? '--- Select ---' : status;
-          if (status === person.availability) {
-            option.selected = true;
-          }
-          select.appendChild(option);
-        });
-        select.addEventListener('change', async e => {
-          const newVal = e.target.value;
-          try {
-            await fetch(`/people/${person.id}`, {
-              method: 'PUT',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ availability: newVal })
-            });
-            console.log(`Updated ${person.name} to ${newVal}`);
-          } catch (err) {
-            console.error('Error updating availability:', err);
-          }
-        });
-        row.appendChild(nameSpan);
-        row.appendChild(select);
-        container.appendChild(row);
-      });
-    }
-
-    // Tab switching logic
-    const regularsTabBtn = document.getElementById('regulars-tab-btn');
-    const extrasTabBtn   = document.getElementById('extras-tab-btn');
-    const regularsTab    = document.getElementById('regulars-container');
-    const extrasTab      = document.getElementById('extras-container');
-
-    regularsTabBtn.addEventListener('click', () => {
-      regularsTabBtn.classList.add('active');
-      extrasTabBtn.classList.remove('active');
-      regularsTab.classList.add('active');
-      extrasTab.classList.remove('active');
     });
-
-    extrasTabBtn.addEventListener('click', () => {
-      extrasTabBtn.classList.add('active');
-      regularsTabBtn.classList.remove('active');
-      extrasTab.classList.add('active');
-      regularsTab.classList.remove('active');
-    });
-
-    fetchData();
+  })();
   </script>
 </body>
 </html>
